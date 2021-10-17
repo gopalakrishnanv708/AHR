@@ -1,0 +1,71 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model AHR.Models.Register
+@{
+}
+
+<div class="row  justify-content-center align-items-center mt-5">
+    <div class="col-sm-12 col-md-8 col-lg-5 col-xl-4">
+
+        <div class="card border-success">
+            <div class="card-header text-center  text-white bg-success ">
+                <h4 class="text-white"><b>AHR</b> REGISTER</h4>
+            </div>
+
+            
+
+            <form method="post" asp-controller="Account" asp-action="Register">
+                <div class="m-3">
+                    <label class="form-label">Name</label>
+                    <input type="text" class="form-control border-success" placeholder="Name" asp-for="Name">
+                    <b> <span asp-validation-for="Name" class="text-danger mb-1"></span></b>
+                </div>
+                
+
+                <div class="m-3">
+                    <label class="form-label">Email</label>
+                    <input type="text" class="form-control border-success" placeholder="Email" asp-for="Email">
+                    <b> <span asp-validation-for="Email" class="text-danger mb-1"></span></b>
+                </div>
+                
+
+                <div class="m-3">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-control border-success" placeholder="Password" asp-for="Password">
+                    <b> <span asp-validation-for="Password" class="text-danger mb-1"></span></b>
+                </div>
+                
+
+                <div class="m-3">
+                    <label class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control border-success" placeholder="Confirm Password" asp-for="ConfirmPassword">
+                    <b> <span asp-validation-for="ConfirmPassword" class="text-danger"></span></b>
+                </div>
+                
+
+                <div class="m-3">
+                    <label class="form-label">Mobile Number</label>
+                    <input type="number" class="form-control border-success" placeholder="Mobile Number" asp-for="MobileNumber">
+                    <b> <span asp-validation-for="MobileNumber" class="text-danger mb-1"></span></b>
+                </div>
+                
+                <div class="m-3">
+                    <b> <spanclass class="text-danger">@TempData["Error"] </ span ></b>
+                </div>
+
+                <div class="row m-3">
+                    <div class="col-8">
+
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-outline-success btn-group-lg">REGISTER</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

@@ -8,7 +8,7 @@ namespace AHR.Models
 {
     public class Login
     {
-
+        [StringLength(60, ErrorMessage = "Minimum 5 character is required", MinimumLength = 5)]
         [Required]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }

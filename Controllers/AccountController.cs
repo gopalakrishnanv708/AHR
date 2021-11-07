@@ -44,7 +44,7 @@ namespace AHR.Controllers
                     var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
                     await HttpContext.SignInAsync(claimsPrincipal);
                     bool t = HttpContext.User.Identity.IsAuthenticated;
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Income", "Admin");
                 }
                 else if (accountDbContext.ValidateCredentials(login) && accountDbContext.Role.Equals("D"))
                 {
@@ -56,17 +56,18 @@ namespace AHR.Controllers
                     var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
                     await HttpContext.SignInAsync(claimsPrincipal);
                     bool t = HttpContext.User.Identity.IsAuthenticated;
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Member", "Home");
                 }
                 else
                 {
+                    TempData["Error"] = "Username or Pasword is incorrect";
                     return View("Login");
                 }
                 
             }
             else
             {
-                TempData["Error"] = "Username or Pasword is incorrect";
+                
                 return View("Login");
             }
 
@@ -81,13 +82,22 @@ namespace AHR.Controllers
 
         [Route("/Account/Register")]
         [HttpPost("Register")]
-        public IActionResult ValidateRegister(Register register)
+        public async Task<IActionResult> ValidateRegister(Register register)
         {
             if (ModelState.IsValid)
             {
-                if(accountDbContext.CreateUser(register))
+                var claims = new List<Claim>();
+
+                if (accountDbContext.CreateUser(register))
                 {
-                    return RedirectToAction("Login", "Account");
+                    claims.Add(new Claim("email", register.Email));
+                    claims.Add(new Claim(ClaimTypes.NameIdentifier, register.Email));
+                    claims.Add(new Claim(ClaimTypes.Role, "D"));
+                    var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+                    await HttpContext.SignInAsync(claimsPrincipal);
+                    bool t = HttpContext.User.Identity.IsAuthenticated;
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
@@ -102,7 +112,7 @@ namespace AHR.Controllers
         public async  Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync();
-            return RedirectToAction("Login", "Account");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

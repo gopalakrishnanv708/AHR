@@ -1,0 +1,86 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model AHR.Models.Expense
+
+@{
+}
+
+<div class="row  justify-content-center align-items-center mt-5">
+    <div class="col-sm-12 col-md-8 col-lg-5 col-xl-4">
+
+        <div class="card border-success">
+            <div class="card-header text-center  text-white bg-success ">
+                <h4 class="text-white"><b>EXPENSE DETAILS</b></h4>
+            </div>
+
+            <form method="post" asp-controller="Admin" asp-action="Expense" enctype="multipart/form-data">
+
+                <div class="m-3">
+                    <label class="form-label">Family Name</label>
+                    <select asp-for="FamilyName" asp-items="@(new SelectList(ViewBag.familyName))" class="form-select border-success">
+                        <option value="none" selected disabled hidden>
+                            -- Select Family Name --
+                        </option>
+                    </select>
+                    <b> <spanclass class="text-danger">@TempData["error_family"] </ span ></b>
+                    <b> <span asp-validation-for="FamilyName" class="text-danger mt-1"></span></b>
+                </div>
+
+                <div class="m-3">
+                    <label class="form-label">Expense Date</label>
+                    <input id="cusdate" type="date" class="form-control border-success" placeholder="Expense Date" asp-for="ExpenseDate" data-date="" data-date-format="DD-MMM-YY">
+                    <b> <span asp-validation-for="ExpenseDate" class="text-danger mt-1"></span></b>
+                </div>
+
+                <div class="m-3">
+                    <label class="form-label">Expense Amount</label>
+                    <input type="text" step="0.01" class="form-control border-success" placeholder="Expense Amount" asp-for="ExpenseAmount">
+                    <b> <span asp-validation-for="ExpenseAmount" class="text-danger mt-1"></span></b>
+                </div>
+
+                <div class="m-3">
+                    <label class="form-label">Expense Purpose</label>
+                    <textarea class="form-control border-success" placeholder="Expense Purpose" asp-for="ExpensePurpose"></textarea>
+                    <b> <span asp-validation-for="ExpensePurpose" class="text-danger mt-1"></span></b>
+                </div>
+
+                <div class="m-3">
+                    <label class="form-label">Upload Expense Proof</label>
+                    <input class="form-control border-success" asp-for="Imagefile" accept="image/*" multiple>
+                    <b> <span asp-validation-for="Imagefile" class="text-danger mt-1"></span></b>
+                </div>
+
+                <div class="m-3">
+                    <b> <spanclass class="text-danger">@TempData["Error"] </ span ></b>
+                </div>
+
+                <div class="row m-3">
+                    <div class="col-8">
+
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-outline-success btn-group-lg"> SUBMIT </button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+
+                <div class="m-3">
+                    @if (!String.IsNullOrEmpty(Convert.ToString(@TempData["Success"])))
+                    {
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>
+                                @TempData["Success"]
+                            </strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    }
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

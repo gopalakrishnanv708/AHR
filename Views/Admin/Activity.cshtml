@@ -1,0 +1,84 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model AHR.Models.AhrActivity
+
+@{
+}
+<div class="row  justify-content-center align-items-center mt-5">
+    <div class="col-sm-12 col-md-8 col-lg-5 col-xl-4">
+
+        <div class="card border-success">
+            <div class="card-header text-center  text-white bg-success ">
+                <h4 class="text-white"><b>ACTIVITY DETAILS</b></h4>
+            </div>
+
+            <form method="post" asp-controller="Admin" asp-action="Activity" enctype="multipart/form-data">
+
+                <div class="m-3">
+                    <label class="form-label">Family Name</label>
+                    <select asp-for="FamilyName" asp-items="@(new SelectList(ViewBag.familyName))" class="form-select border-success">
+                        <option value="none" selected disabled hidden>
+                            -- Select Family Name --
+                        </option>
+                    </select>
+                    <b> <span asp-validation-for="FamilyName" class="text-danger mt-1"></span></b>
+                </div>
+
+                <div class="m-3">
+                    <label class="form-label">Activity Date</label>
+                    <input id="cusdate" type="date" class="form-control border-success" placeholder="Activity Date" asp-for="ActivityDate" data-date="" data-date-format="DD-MMM-YY">
+                    <b> <span asp-validation-for="ActivityDate" class="text-danger mt-1"></span></b>
+                </div>
+
+                <div class="m-3">
+                    <label class="form-label">Activity Description</label>
+                    <textarea class="form-control border-success" placeholder="Activity Description" asp-for="ActivityDesc"></textarea>
+                    <b> <span asp-validation-for="ActivityDesc" class="text-danger mt-1"></span></b>
+                </div>
+
+                <div class="m-3">
+                    <label class="form-label">Upload Proof - Images</label>
+                    <input class="form-control border-success" asp-for="Imagefile" accept="image/*" multiple>
+                    <b> <span asp-validation-for="Imagefile" class="text-danger mt-1"></span></b>
+                </div>
+
+                <div class="m-3">
+                    <label class="form-label">Upload Proof - Video</label>
+                    <input class="form-control border-success" asp-for="Videofile" accept="video/*" multiple>
+                    <b> <span asp-validation-for="Videofile" class="text-danger mt-1"></span></b>
+                </div>
+
+                <div class="m-3">
+                    <b> <spanclass class="text-danger">@TempData["Error"] </ span ></b>
+                </div>
+
+                <div class="row m-3">
+                    <div class="col-8">
+
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-outline-success btn-group-lg"> SUBMIT </button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+
+                <div class="m-3">
+                    @if (!String.IsNullOrEmpty(Convert.ToString(@TempData["Success"])))
+                    {
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>
+                                @TempData["Success"]
+                            </strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    }
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,76 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model AHR.Models.ContactUs
+@{
+}
+<div class="row  justify-content-center align-items-center mt-5">
+    <div class="col-sm-12 col-md-8 col-lg-5 col-xl-4">
+
+        <div class="card border-success">
+            <div class="card-header text-center  text-white bg-success ">
+                <h4 class="text-white"> CONTACT US</h4>
+            </div>
+
+
+
+            <form method="post" asp-controller="Home" asp-action="ContactUs">
+                <div class="m-3">
+                    <label class="form-label">Name</label>
+                    <input type="text" class="form-control border-success" placeholder="Name" asp-for="Name">
+                    <b> <span asp-validation-for="Name" class="text-danger mb-1"></span></b>
+                </div>
+
+                <div class="m-3">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control border-success" placeholder="Email" asp-for="Email">
+                    <b> <span asp-validation-for="Email" class="text-danger mb-1"></span></b>
+                </div>
+
+                <div class="m-3">
+                    <label class="form-label">Mobile Number</label>
+                    <input type="text" class="form-control border-success" placeholder="Mobile Number" asp-for="MobileNumber">
+                    <b> <span asp-validation-for="MobileNumber" class="text-danger mb-1"></span></b>
+                </div>
+
+                <div class="m-3">
+                    <label class="form-label">Message</label>
+                    <textarea class="form-control border-success" placeholder="Message" asp-for="Message"></textarea>
+                    <b> <span asp-validation-for="Message" class="text-danger mt-1"></span></b>
+                </div>
+
+                <div class="m-3">
+                    <b> <spanclass class="text-danger">@TempData["Error"] </ span ></b>
+                </div>
+
+                <div class="row m-3">
+                    <div class="col-8">
+
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-outline-success btn-group-lg">SUBMIT</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+
+                <div class="row m-3">
+                    @if (!String.IsNullOrEmpty(Convert.ToString(@TempData["Success"])))
+                    {
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>
+                                @TempData["Success"]
+                            </strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    }
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+

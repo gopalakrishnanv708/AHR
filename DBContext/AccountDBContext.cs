@@ -9,6 +9,7 @@ namespace AHR.DBContext
     public class AccountDBContext
     {
         public string Role;
+        public int userId;
         private Login login;
         private static IConfiguration Configuration = new Config().Configuration;
 
@@ -83,6 +84,7 @@ namespace AHR.DBContext
                 login.Email = dataRow.ItemArray[3].ToString().Trim();
                 login.Password = dataRow.ItemArray[5].ToString().Trim();
                 Role = dataRow.ItemArray[1].ToString().Trim();
+                userId = Convert.ToInt32(dataRow.ItemArray[0]);
                 return true;
             }
             else
@@ -108,6 +110,47 @@ namespace AHR.DBContext
             else
             {
                 return false;
+            }
+        }
+
+        public bool ValidateUser(string email)
+        {
+
+            if (ReadDataTable(GetLoginDetails(email)))
+            {
+                if (String.IsNullOrEmpty(login.Email))
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public int GetUserId(string email)
+        {
+
+            if (ReadDataTable(GetLoginDetails(email)))
+            {
+                if (String.IsNullOrEmpty(login.Email))
+                {
+                    return 0;
+                }
+                else
+                {
+                    return userId;
+                }
+            }
+
+            else
+            {
+                return 0;
             }
         }
     }

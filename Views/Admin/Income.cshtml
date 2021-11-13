@@ -59,7 +59,7 @@
                 <div class="m-3">
                     <label class="form-label">Payment Date</label>
 
-                    <input id="cusdate" type="date" class="form-control border-success" asp-for="PaymentDate" asp-format="{0:MM}" data-date="" data-date-format="DD-MMM-YY">
+                    <input id="cusdate" type="date" class="form-control border-success" max="@DateTime.Now.ToString("DD-MMM-YY")" asp-for="PaymentDate" asp-format="{0:MM}" data-date="" data-date-format="DD-MMM-YY">
                     <b> <span asp-validation-for="PaymentDate" class="text-danger mt-1"></span></b>
                 </div>
 

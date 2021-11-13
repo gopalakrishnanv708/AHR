@@ -1,0 +1,99 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@{
+}
+
+<div class="container-fluid">
+
+    <h2 class="font-weight-bold mb-2">Funds Received</h2>
+
+    @{
+        if(ViewBag.GetFundsReceived.Count > 0)
+        {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Payment Method</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in (ViewBag.GetFundsReceived))
+        {
+                <tr>
+                    <td>@item.PaymentDate</td>
+                    <td>@item.PaymentAmount</td>
+                    <td>@item.PaymentMethod</td>
+                </tr>
+        }
+                <tr>
+                    <td><b>Total</b></td>
+                    <td>@ViewData["Total"]</td>
+
+                </tr>
+            </tbody>
+        </table>
+    }
+    else{
+        <div><p>No Data Found</p></div>
+    }
+    }
+
+
+</div>
+
+<div class="container-fluid">
+
+    <h2 class="font-weight-bold mb-2">Funds Spent</h2>
+
+    @{
+    if(ViewBag.GetFundsSpent.Count > 0){
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Family No</th>
+                    <th scope="col">Family Name</th>
+                    <th scope="col">Expense Date</th>
+                    <th scope="col">Expense Amount</th>
+                    <th scope="col">Purpose</th>
+                    <th scope="col">Proof/Document</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in (ViewBag.GetFundsSpent))
+        {
+                <tr>
+                    <td>@item.FamilyNo</td>
+                    <td>@item.FamilyName</td>
+                    <td>@item.ExpenseDate</td>
+                    <td>@item.ExpenseAmount</td>
+                    <td>@item.ExpensePurpose</td>
+                    <td>
+                        @foreach(var doc in item.ProofDocument){
+                        @doc  <br />
+                }
+                    </td>
+                </tr>
+        }
+                <tr>
+                    <td><b>Total</b></td>
+                    <td>@ViewData["TotalSpent"]</td>
+
+                </tr>
+            </tbody>
+        </table>
+    }
+    else{
+        <div><p>No Data Found</p></div>
+    }
+
+    }
+
+
+</div>
+
+<h3><b>Funds Remaining : @ViewData["TotalRem"]</b></h3>

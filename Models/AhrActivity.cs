@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace AHR.Models
 {
+
     public class AhrActivity
     {
         [Required]
@@ -14,6 +15,7 @@ namespace AHR.Models
         public string FamilyName { get; set; }
 
         [Required]
+        [ValidateDateRange]
         [DataType(DataType.Date)]
         public string ActivityDate { get; set; }
 

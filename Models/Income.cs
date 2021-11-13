@@ -5,13 +5,32 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AHR.Models
 {
+
+    public class ValidateDateRange : ValidationAttribute
+    {
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        {
+            
+            if (Convert.ToDateTime(value) <= DateTime.Now)
+            {
+                return ValidationResult.Success;
+            }
+            else
+            {
+                return new ValidationResult("Please select past date range");
+            }
+        }
+    }
+
     public class Income
     {
         [Required]
         [DataType(DataType.Text)]
         public string DonorEmail { get; set; }
 
+        
         [Required]
+        [ValidateDateRange]
         [DataType(DataType.Date)]
         public DateTime PaymentDate { get; set; }
 

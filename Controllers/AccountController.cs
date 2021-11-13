@@ -56,7 +56,7 @@ namespace AHR.Controllers
                     var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
                     await HttpContext.SignInAsync(claimsPrincipal);
                     bool t = HttpContext.User.Identity.IsAuthenticated;
-                    return RedirectToAction("Member", "Home");
+                    return RedirectToAction("MyFinancials", "Members");
                 }
                 else
                 {

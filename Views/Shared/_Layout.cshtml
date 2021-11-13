@@ -1,5 +1,4 @@
-﻿
-@using Microsoft.AspNetCore.Authorization
+﻿@using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Http.Extensions
 @inject IAuthorizationService AuthorizationService
 
@@ -98,7 +97,7 @@
                         @if ((User.Identity.IsAuthenticated) && (User.IsInRole("D")))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Member">Member Page</a>
+                                <a class="nav-link text-light" asp-area="" asp-controller="Members" asp-action="MyFinancials">Member Page</a>
                             </li>
                         }
 

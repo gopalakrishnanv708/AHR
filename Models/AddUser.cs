@@ -17,6 +17,7 @@ namespace AHR.Models
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
+
         [Required]
         [DataType(DataType.Text)]
         public string UserType { get; set; }

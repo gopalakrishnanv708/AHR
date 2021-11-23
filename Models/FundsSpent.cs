@@ -23,6 +23,7 @@ namespace AHR.Models
         public string ExpensePurpose { get; set; }
 
         public List<string> ProofDocument { get; set; }
+
     }
 
 }

@@ -7,13 +7,12 @@ using System.Threading.Tasks;
 namespace AHR.Models
 {
 
-    public class FamilyActivityList
-    {
-        public List<FamilyActivity> FamilyActivities { get; set; }
-    }
-
     public class FamilyActivity
     {
+        public string Date { get; set; }
+
+        public string FamilyName { get; set; }
+
         [DataType(DataType.Text)]
         public string Description { get; set; }
 

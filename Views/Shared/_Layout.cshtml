@@ -10,6 +10,7 @@
     <title>@ViewData["Title"] - AHR</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/ImageModifier.css" />
     <link href="~/js/image-uploader.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -33,6 +34,16 @@
     <link rel="stylesheet" href="~/css/style.css">
 
     <style>
+
+        .thumbnail {
+            margin-bottom: 6px;
+        }
+
+        .carousel-control.left, .carousel-control.right {
+            background-image: none;
+            margin-top: 10%;
+            width: 5%;
+        }
 
         input[type="file"] {
             display: block;
@@ -97,7 +108,15 @@
                         @if ((User.Identity.IsAuthenticated) && (User.IsInRole("D")))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="Members" asp-action="MyFinancials">Member Page</a>
+                                <a class="nav-link text-light" asp-area="" asp-controller="Members" asp-action="MyFinancials">My Financials</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Members" asp-action="FamilyDetails">Family Details</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Members" asp-action="FamilyUpdates">Family Updates</a>
                             </li>
                         }
 
@@ -119,7 +138,7 @@
 
                             <li class="nav-item ">
                                 <a class="nav-link text-light" asp-area="" asp-controller="Admin" asp-action="AddUser">Add User</a>
-                             </li>
+                            </li>
 
                         }
                         <li class="nav-item">
@@ -187,40 +206,40 @@
         </section>
     </footer>
 
-        <script src="~/lib/jquery/dist/jquery.min.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
-        <script type="text/javascript">
-            $(document).ready(function () {
-                document.getElementById('cusdate').valueAsDate = new Date(Date.now());
+    <script type="text/javascript">
+        $(document).ready(function () {
+            document.getElementById('cusdate').valueAsDate = new Date(Date.now());
 
-                $("#cusdate").on("change", function () {
-                    this.setAttribute(
-                        "data-date",
-                        moment(this.value, "YYYY-MM-DD")
-                            .format(this.getAttribute("data-date-format"))
-                    )
-                }).trigger("change");
-            });
-        </script>
+            $("#cusdate").on("change", function () {
+                this.setAttribute(
+                    "data-date",
+                    moment(this.value, "YYYY-MM-DD")
+                        .format(this.getAttribute("data-date-format"))
+                )
+            }).trigger("change");
+        });
+    </script>
 
-        <script src="~/js/image-uploader.js"></script>
+    <script src="~/js/image-uploader.js"></script>
 
-        <script type="text/javascript">
-            $(function () {
-                $('.input-images-1').imageUploader();
-            });
-        </script>
+    <script type="text/javascript">
+        $(function () {
+            $('.input-images-1').imageUploader();
+        });
+    </script>
 
-        @await RenderSectionAsync("Scripts", required: false)
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

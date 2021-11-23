@@ -3,3 +3,84 @@
 *@
 @{
 }
+@if (ViewBag.FamilyUpdates.Count > 0)
+{
+
+    <div class="container-fluid">
+
+        <label class="fs-5 mb-2 font-weight-bold">Family Activity Details</label>
+
+        @{
+            @foreach (var family in (ViewBag.FamilyUpdates))
+            {
+                <div>
+                    <label class="mb-2 font-weight-bold">@family.FamilyName - @family.Date</label>
+                </div>
+
+                <div class="d-block mb-4" style="border:1.5px solid green; padding:3px">
+
+                    <div>
+                        <label class="mb-2">@family.Description</label>
+                    </div>
+                    <div>
+                        <label class="mb-2 font-weight-bold">Images</label>
+                    </div>
+                    <div class="d-inline-flex">
+                        @foreach (var img in (family.Images))
+                        {
+                            @if (!String.IsNullOrEmpty(img))
+                            {
+                                <img src="~/images/user_images/@img" class="rounded m-2" style="width: 100px;height:100px; cursor:pointer" alt="">
+                            }
+
+                        }
+                    </div>
+                    <div>
+                        <label class="mb-2 font-weight-bold">Video</label>
+                    </div>
+                    <div class="d-inline-flex">
+                        @foreach (var vid in (family.Video))
+                        {
+                            @if (!String.IsNullOrEmpty(vid))
+                            {
+                                <video width="220" height="140" controls class="m-2">
+                                    <source src="~/video/@vid">
+                                </video>
+                            }
+
+                        }
+                    </div>
+                </div>
+            }
+
+        }
+
+    </div>
+}
+else
+{
+    <div><p>No Data Found</p></div>
+}
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <img class="w-100" id="popup-img" src="" alt="image" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('.rounded').click(function(){
+        var src = $(this).attr('src');
+        $('.modal').modal('show');
+        $('#popup-img').attr('src',src);
+    });
+</script>

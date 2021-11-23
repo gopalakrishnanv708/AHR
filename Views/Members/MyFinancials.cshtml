@@ -5,95 +5,128 @@
 @{
 }
 
-<div class="container-fluid">
+<p class="fs-5 fw-bold mb-2 text-start ml-4">My Financials</p>
 
-    <h2 class="font-weight-bold mb-2">Funds Received</h2>
+<div class="col-12 d-inline-flex">
+    <div class="container-fluid col-12 col-sm-4">
 
-    @{
-        if(ViewBag.GetFundsReceived.Count > 0)
-        {
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">Date</th>
-                    <th scope="col">Amount</th>
-                    <th scope="col">Payment Method</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in (ViewBag.GetFundsReceived))
-        {
-                <tr>
-                    <td>@item.PaymentDate</td>
-                    <td>@item.PaymentAmount</td>
-                    <td>@item.PaymentMethod</td>
-                </tr>
+        <label class="fs-5 fw-bold mb-2">Funds Received From You</label>
+
+        @{
+            if (ViewBag.GetFundsReceived.Count > 0)
+            {
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col" style="text-align:right">Amount</th>
+                            <th scope="col">Payment Method</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in (ViewBag.GetFundsReceived))
+                        {
+                            <tr>
+                                <td>@item.PaymentDate</td>
+                                <td style="text-align:right">@item.PaymentAmount</td>
+                                <td>@item.PaymentMethod</td>
+                            </tr>
+                        }
+                        <tr>
+                            <td><b>Total</b></td>
+                            <td style="text-align:right">@ViewData["Total"]</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <div><p>No Data Found</p></div>
+            }
         }
-                <tr>
-                    <td><b>Total</b></td>
-                    <td>@ViewData["Total"]</td>
-
-                </tr>
-            </tbody>
-        </table>
-    }
-    else{
-        <div><p>No Data Found</p></div>
-    }
-    }
 
 
+    </div>
+
+    <div class="container-fluid col-12 col-sm-8">
+
+        <h2 class="fs-5 fw-bold mb-2">Funds Spent On Your Supported Families</h2>
+
+        @{
+            if (ViewBag.GetFundsSpent.Count > 0)
+            {
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+
+                            <th scope="col">Family Name</th>
+                            <th scope="col" style="text-align:right">Expense Amount</th>
+                            <th scope="col">Expense Date</th>
+                            <th scope="col">Purpose</th>
+                            <th scope="col">Proof/Document</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in (ViewBag.GetFundsSpent))
+                        {
+                            <tr>
+
+                                <td>@item.FamilyName</td>
+                                <td style="text-align:right">@item.ExpenseAmount</td>
+                                <td>@item.ExpenseDate</td>
+                                <td>@item.ExpensePurpose</td>
+                                <td>
+                                    @foreach (var doc in item.ProofDocument)
+                                    {
+
+                                        <img src="~/images/user_images/@doc" class="rounded" style="width: 30px; height:30px; margin-left:4px; cursor:pointer">
+
+
+                                    }
+                                </td>
+                            </tr>
+                        }
+                        <tr>
+                            <td><b>Total</b></td>
+                            <td style="text-align:right">@ViewData["TotalSpent"]</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <div><p>No Data Found</p></div>
+            }
+
+        }
+
+
+    </div>
+</div>
+<p class="fs-5 fw-bold mb-2 ml-4"><b>Funds Remaining : @ViewData["TotalRem"]</b></p>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <img class="w-100" id="popup-img" src="" alt="image" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="container-fluid">
-
-    <h2 class="font-weight-bold mb-2">Funds Spent</h2>
-
-    @{
-    if(ViewBag.GetFundsSpent.Count > 0){
-
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">Family No</th>
-                    <th scope="col">Family Name</th>
-                    <th scope="col">Expense Date</th>
-                    <th scope="col">Expense Amount</th>
-                    <th scope="col">Purpose</th>
-                    <th scope="col">Proof/Document</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in (ViewBag.GetFundsSpent))
-        {
-                <tr>
-                    <td>@item.FamilyNo</td>
-                    <td>@item.FamilyName</td>
-                    <td>@item.ExpenseDate</td>
-                    <td>@item.ExpenseAmount</td>
-                    <td>@item.ExpensePurpose</td>
-                    <td>
-                        @foreach(var doc in item.ProofDocument){
-                        @doc  <br />
-                }
-                    </td>
-                </tr>
-        }
-                <tr>
-                    <td><b>Total</b></td>
-                    <td>@ViewData["TotalSpent"]</td>
-
-                </tr>
-            </tbody>
-        </table>
-    }
-    else{
-        <div><p>No Data Found</p></div>
-    }
-
-    }
-
-
-</div>
-
-<h3><b>Funds Remaining : @ViewData["TotalRem"]</b></h3>
+<script>
+    $('.rounded').click(function(){
+        var src = $(this).attr('src');
+        $('.modal').modal('show');
+        $('#popup-img').attr('src',src);
+    });
+</script>

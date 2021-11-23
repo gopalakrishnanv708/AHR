@@ -55,6 +55,7 @@ namespace AHR.Controllers
         [HttpGet]
         public IActionResult FamilyDetails()
         {
+            ViewBag.FamilyDetails = adminDBContext.ProcessFamilyDetails(adminDBContext.GetFamilyDetails());
             return View();
         }
 
@@ -63,6 +64,7 @@ namespace AHR.Controllers
         [HttpGet]
         public IActionResult FamilyUpdates()
         {
+            ViewBag.FamilyUpdates = adminDBContext.ProcessFamilyUpdates(adminDBContext.GetFamilyActivity());
             return View();
         }
     }

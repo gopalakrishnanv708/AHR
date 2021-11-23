@@ -2,4 +2,91 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    int i = 0;
 }
+
+<p class="fs-5 fw-bold mb-2 text-start ml-3">Family Details</p>
+
+@if (ViewBag.FamilyDetails.Count > 0)
+{
+
+    <div class="container-fluid">
+
+
+
+        @{
+            @foreach (var family in (ViewBag.FamilyDetails))
+            {
+                i = i + 1;
+                <label class="mb-2 font-weight-bold">Family @i</label>
+
+                <table class="table table-bordered mb-4">
+                    <thead>
+                        <tr>
+                            <th scope="col">Family No</th>
+                            <th scope="col">Family Name</th>
+                            <th scope="col">Member Name</th>
+                            <th scope="col">IsHead</th>
+                            <th scope="col">DOB</th>
+                            <th scope="col">Passport Number</th>
+                            <th scope="col">Visa Expiry Date</th>
+                            <th scope="col">Nationality</th>
+                            <th scope="col">Relation</th>
+                            <th scope="col">Picture</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var familyMember in (family.FamilyDetails))
+                        {
+                            <tr>
+                                <td>@familyMember.FamilyNo</td>
+                                <td>@familyMember.FamilyName</td>
+                                <td>@familyMember.FamilyMemberName</td>
+                                <td>@familyMember.IsHead</td>
+                                <td>@familyMember.DOB</td>
+                                <td>@familyMember.PassportNumber</td>
+                                <td>@familyMember.VisaExpiryDate</td>
+                                <td>@familyMember.Nationality</td>
+                                <td>@familyMember.RelationWithHead</td>
+                                <td>
+                                <img src="~/images/user_images/@familyMember.PicOfMember" class="rounded" 
+                                style="width: 30px; height:30px; margin-left:4px; cursor:pointer">
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            }
+
+        }
+
+
+    </div>
+}
+else
+{
+    <div><p>No Data Found</p></div>
+}
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <img class="w-100" id="popup-img" src="" alt="image" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('.rounded').click(function(){
+        var src = $(this).attr('src');
+        $('.modal').modal('show');
+        $('#popup-img').attr('src',src);
+    });
+</script>

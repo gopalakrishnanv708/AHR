@@ -3,13 +3,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AHR.Models
 {
-
-    public class FamilyDetailsList
+    public class FamilyMemberList
     {
-        public List<FamilyDetails> FamilyDetails { get; set; }
+        public List<FamilyMember> FamilyDetails { get; set; }
     }
 
-    public class FamilyDetails
+    public class FamilyMember
     {
         [DataType(DataType.Text)]
         public int FamilyNo { get; set; }
